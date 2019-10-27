@@ -7,10 +7,10 @@
  */
 
 /**
-* 学生模型类
+* 新闻模型类
 */
 require_once("./Model/Db.class.php");
-class StudentModel
+class NewsModel
 {
     // 创建私有变量保存数据库对象
     private $db = null;
@@ -24,22 +24,29 @@ class StudentModel
         "charset" => "utf8"
     );
     $this->db = Db::getInstance($arr_config);
-    }
+}
 
-    // 查询数据库并返回二维数组的学生信息
+    // 查询数据库并返回二维数组的新闻信息
     public function getdata(){
         // 创建数据库Db的对象
         // $db = Db::getInstance($this->arr_config);
-        // 使用联合查询
-        $sql = "SELECT stu_id, name, sex_sex, age, class_num, phone,addr  FROM student_info as stu INNER JOIN sex_info as sex on stu.sex = sex.sex_id";
+        // 使用查询获取新闻字段
+        $sql = "SELECT nid, title, source, hits, addate FROM news";
         return $this->db->fetchAll($sql);
     }
 
-    public function delete($stu_id){
+    public function delete($nid){
         // $db = Db::getInstance($this->arr_config);
-        $sql = "DELETE FROM student_info WHERE stu_id = {$stu_id}";
-        echo "$sql";
+        $sql = "DELETE FROM news WHERE nid = {$nid}";
+        // echo "$sql";
         // DELECT FROM student_info WHERE stu_id = 5
-        // return $this->db->exec($sql);
+        return $this->db->exec($sql);
+    }
+
+    // 获取查询数量
+    public function getCount(){
+        $sql = "SELECT * FROM news;";
+        // print_r($sql);
+        return $this->db->rowCount($sql);
     }
 }

@@ -1,0 +1,50 @@
+{
+	BA10TA81wangning: [
+		{
+			liveInfo: null,
+			docid: "ESB2PFAK00038FO9",
+			source: "网易娱乐",
+			title: "江一燕曾遭于正调侃:蛋糕店老板娘扶正后不一样了",
+			priority: 119,
+			hasImg: 1,
+			url: "http://3g.163.com/ent/19/1025/11/ESB2PFAK00038FO9.html",
+			commentCount: 1694,
+			imgsrc3gtype: "1",
+			stitle: "",
+			digest: "于正与江一燕网易娱乐10月25日报道江一燕因获建筑奖引起网友",
+			imgsrc: "http://cms-bucket.ws.126.net/2019/10/25/823f3ab62fc741f1a1b8b2ffd94eda79.png",
+			ptime: "2019-10-25 11:12:19"
+		},
+		{
+			liveInfo: null,
+			docid: "ESAUM39C00038FO9",
+			source: "网易娱乐",
+			title: "华晨宇深圳演唱会宣布取消 前经纪人发博疑似嘲讽",
+			priority: 119,
+			hasImg: 1,
+			url: "http://3g.163.com/ent/19/1025/10/ESAUM39C00038FO9.html",
+			commentCount: 1282,
+			imgsrc3gtype: "1",
+			stitle: "",
+			digest: "网友转发表态网易娱乐10月25日报道近日，华晨宇深圳演唱会因",
+			imgsrc: "http://cms-bucket.ws.126.net/2019/10/25/655cab09f7df48749b235774e7b943e4.png",
+			ptime: "2019-10-25 10:00:34"
+		}
+	]
+}
+
+nic 新闻ID  auto
+cid 分类ID  				['docid']
+title 标题  				['title']
+author 作者 				['source']
+source 来源				['source']
+keywords 关键字			['source'][2:]
+description 描述			['url']
+orderby 排序				50
+content 内容				['digest']
+hits 点击量 访问量		['commentCount']
+addate 发布时间			['ptime']
+
+for i in data["BA10TA81wangning"]:
+	items = {}
+	print (i) #

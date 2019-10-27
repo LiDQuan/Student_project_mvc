@@ -1,8 +1,7 @@
 <?php
-    // echo "1123";
 
-    // 包含学生model
-    require_once "./Model/StudentModel.class.php";
+    // 包含新闻model
+    require_once "./Model/NewsModel.class.php";
 
     // 获取用户动作参数
     // var_dump($_GET);
@@ -10,10 +9,10 @@
     if($ac == 'delete')
     {
         // 获取$_GET中的id
-        $id = $_GET['stu_id'];
-        // 创建学生模型对象，并调用delect删除方法
-        $stu = new StudentModel();
-        $result = $stu->delete($id);
+        $id = $_GET['nid'];
+        // 创建新闻模型对象，并调用delect删除方法
+        $new = new NewsModel();
+        $result = $new->delete($id);
         // 最后通过delect方法返回值判断是否删除成功
         if($result){
             echo "<h2>数据删除成功</h2>,三秒后跳转","<br>";
@@ -25,13 +24,16 @@
             die();
         }
     }else{
-        // 创建对象使用学生模型，获取学生数据
+        // 创建对象使用新闻模型，获取学生数据
         #$db = Db::getInstance(); //不用创建数据库对象，因为这里是控制器，不用管数据是如何调用，只负责获取数据
-        $stu = new StudentModel();
+        $new = new NewsModel();
         // 调用学生模型类获取学生信息的二维数组
-        $stuData = $stu->getdata();
+        $newData = $new->getdata();
+        // 调用新闻类模型获取新闻总条数
+        // $records = $new->getCount();
+        $records = $new->getCount();
     }
     // 显示视图
-    include './StudentIndexView.html';
+    include './NewsIndexView.html';
 
 ?>

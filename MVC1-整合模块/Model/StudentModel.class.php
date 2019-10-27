@@ -24,7 +24,7 @@ class StudentModel
         "charset" => "utf8"
     );
     $this->db = Db::getInstance($arr_config);
-    }
+}
 
     // 查询数据库并返回二维数组的学生信息
     public function getdata(){
@@ -38,8 +38,8 @@ class StudentModel
     public function delete($stu_id){
         // $db = Db::getInstance($this->arr_config);
         $sql = "DELETE FROM student_info WHERE stu_id = {$stu_id}";
-        echo "$sql";
+        // echo "$sql";
         // DELECT FROM student_info WHERE stu_id = 5
-        // return $this->db->exec($sql);
+        return $this->db->exec($sql);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-    // echo "1123";
 
     // 包含学生model
     require_once "./Model/StudentModel.class.php";
