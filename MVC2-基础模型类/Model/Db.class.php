@@ -11,7 +11,7 @@ class Db
 	private $db_pass; //密码
 	private $db_name; //数据库名
 	private $charset; //字符集
-	private $link; 	  //连接对象
+	private $link; 	  //连接对象	
 
 	//私有的构造方法：阻止类外new对象
 	private function __construct($config=array())
@@ -103,7 +103,7 @@ class Db
 		}
 
 		//返回执行的结果(结果集对象)
-		return mysqli_query($this->link, $sql);
+		return mysqli_query($this->link, $sql);	
 	}
 
 	//公共的获取单行数据的方法
@@ -137,7 +137,7 @@ class Db
 			);
 
 		//返回二维数组
-		return mysqli_fetch_all($result, $types[$type]);
+		return mysqli_fetch_all($result, $types[$type]);		
 	}
 
 	//获取记录数
