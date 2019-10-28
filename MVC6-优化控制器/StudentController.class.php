@@ -5,13 +5,18 @@
     require_once "./Model/FactroyModel.class.php";
 
     final class StudentController{
+
+        private $stu = null;
+
+        public function __construct(){
+            $this->stu = FactroyModel::getInstance("StudentModel");
+        }
+
         public function delete(){
             // 获取$_GET中的id
             $id = $_GET['stu_id'];
             // 创建学生模型对象，并调用delect删除方法
-            $stu = FactroyModel::getInstance("StudentModel");
-            $result = $stu->delete($id);
-            // 最后通过delect方法返回值判断是否删除成功
+            $result = $this->stu->delete($id);
             if($result){
                 echo "<h2>数据删除成功</h2>,三秒后跳转","<br>";
                 header("refresh:3;url=?");
@@ -24,8 +29,8 @@
             }
 
         public function index(){
-            $stu = FactroyModel::getInstance("StudentModel");
-            $stuData = $stu->getdata();
+            $stuData = $this->stu->getdata();
+            $records = $this->stu->getCount();
             include './StudentIndexView.html';
         }
 
@@ -34,10 +39,9 @@
         }
 
         public function insert(){
-            $stu = FactroyModel::getInstance("StudentModel");
             // 开始获取表单数据
             $arr = array(
-                'stu_id' => $stu->get_MaxStu_id()['max(stu_id)'] + 1,
+                'stu_id' => $this->stu->get_MaxStu_id()['max(stu_id)'] + 1,
                 'name' => $_POST['name'],
                 'sex' => $_POST['sex'] + 1,
                 'age' => $_POST['age'],
@@ -45,11 +49,7 @@
                 'phone' => $_POST['phone'],
                 'addr' => $_POST['addr']
             );
-            // echo "<pre>";
-            // print_r(implode(',',$arr));
-            // $stu->insert($arr);
-
-            if($stu->insert($arr)){
+            if($this->stu->insert($arr)){
                 echo "数据插入成功", "<br/>";
                 echo "三秒后返回学生信息管理页面","<br/>";
                 header("refresh:3;url=./index.php");
@@ -64,13 +64,4 @@
     $stuobj = new StudentController();
     // 与新闻控制器类相同，使用调用方法优化控制器代码
     $stuobj->$ac();
-    // if($ac == 'delete'){
-    //     $stuobj->delete();
-    // }elseif($ac == 'add'){
-    //     $stuobj->add();
-    // }elseif($ac == 'insert'){
-    //     $stuobj->insert();
-    // }else{
-    //     $stuobj->index();
-    // }
 ?>

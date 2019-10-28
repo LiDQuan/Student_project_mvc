@@ -34,8 +34,14 @@ class StudentModel extends BaseModel
     public function insert($arr){
         // $str_arr = implode(",", $arr);
         $sql = "INSERT INTO student_info VALUE(null, {$arr['stu_id']}, '{$arr['name']}', {$arr['sex']}, {$arr['age']}, {$arr['class_num']}, {$arr['phone']}, '{$arr['addr']}')";
-        print_r($sql);
         return $this->db->exec($sql);
+    }
+
+    // 获取查询数量
+    public function getCount(){
+        $sql = "SELECT * FROM student_info;";
+        // print_r($sql);
+        return $this->db->rowCount($sql);
     }
 
     public function get_MaxStu_id(){

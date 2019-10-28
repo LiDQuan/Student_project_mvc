@@ -13,8 +13,7 @@
         }
 
         public function delete(){
-            $id = $_GET['nid'];
-            // $new = FactroyModel::getInstance("NewsModel");            
+            $id = $_GET['nid'];    
             $result = $this->new->delete($id);
             if($result){
                 echo "<h2>数据删除成功</h2>,三秒后跳转","<br>";
@@ -28,7 +27,6 @@
         }
 
         public function index(){
-            // $new = FactroyModel::getInstance("NewsModel"); 
             $newData = $this->new->getdata();
             $records = $this->new->getCount();
             include './NewsIndexView.html';
@@ -39,18 +37,6 @@
         }
 
         public function insert(){
-            /*  
-            $_POST中的信息
-                Array
-                (
-                    [titel] => 新闻标题
-                    [orderby] => 30
-                    [content] => 今天天气好晴朗
-                    [hits] => 888
-                    [token] => random
-                )
-            */
-            // $new = FactroyModel::getInstance("NewsModel");
             date_default_timezone_set('UTC');
             $arr_data = array(
                 'nid' => $this->new->get_Max('nid')['max(nid)'] + 1,
@@ -60,7 +46,6 @@
                 'content' => $_POST['content'],
                 'hits' => $_POST['hits'],
                 'addate' => date('Y-m-d'),
-                // 'addr' => $_POST['addr']
             );
             if($this->new->insertdata($arr_data)){
                 echo "新闻插入成功";
@@ -68,7 +53,6 @@
             }else{
                 echo "插入失败。。。";
             }
-            // $this->new->insertdata($arr_data);
         }
     }
 
@@ -79,21 +63,5 @@
     $newobj = new NewsController();
     // 优化根据调用方法名优化if语句
     $newobj->$ac();
-    // if($ac == 'delete')
-    // {
-    //     $newobj->delete();
-    // }
-    // elseif($ac == 'add')
-    // {
-    //     $newobj->add();
-    // }
-    // elseif($ac == 'insert')
-    // {
-    //     $newobj->insert();
-    // }else{
-    //     // echo "string";
-    //     $newobj->index();
-    // }
-
 
 ?>
