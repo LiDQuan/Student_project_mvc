@@ -60,6 +60,7 @@ class StudentModel extends BaseModel
     // 获取查询数量
     public function getCount(){
         $sql = "SELECT * FROM student_info;";
+        // print_r($sql);
         return $this->db->rowCount($sql);
     }
 
