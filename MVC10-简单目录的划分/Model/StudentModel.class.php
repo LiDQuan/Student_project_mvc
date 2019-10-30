@@ -9,9 +9,6 @@
 /**
 * 学生模型类
 */
-// 包含基础模型类，并继承基础模型类
-require_once "./Model/BaseModel.class.php";
-
 class StudentModel extends BaseModel
 {
     // 查询数据库并返回二维数组的学生信息

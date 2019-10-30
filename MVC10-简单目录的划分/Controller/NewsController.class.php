@@ -1,9 +1,5 @@
 <?php
 
-    // 包含工厂模型类，通过工厂模型类的最终类的静态方法来new对象，提高安全性
-    // 调用最终类的静态方法是直接 类名::方法名($参数)
-    require_once "./Model/BaseController.class.php";
-
     final class NewsController extends BaseController{
 
         private $new = null;    
@@ -25,11 +21,11 @@
         public function index(){
             $newData = $this->new->getdata();
             $records = $this->new->getCount();
-            include './NewsIndexView.html';
+            include './View/News/index.html';
         }
 
         public function add(){
-            include './NewsaddView.html';
+            include './View/News/add.html';
         }
 
         public function insert(){
@@ -50,13 +46,4 @@
             }
         }
     }
-
-
-    // 获取用户动作参数
-    // var_dump($_GET);
-    $ac = isset($_GET['ac']) ? $_GET['ac'] : 'index';
-    $newobj = new NewsController();
-    // 优化根据调用方法名优化if语句
-    $newobj->$ac();
-
 ?>

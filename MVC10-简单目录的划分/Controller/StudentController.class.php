@@ -1,9 +1,5 @@
 <?php
 
-    // 包含工厂模型类，通过工厂模型类的最终类的静态方法来new对象，提高安全性
-    // 调用最终类的静态方法是直接 类名::方法名($参数)
-    require_once "./Model/BaseController.class.php";
-
     final class StudentController extends BaseController{
 
         private $stu = null;
@@ -14,11 +10,11 @@
         public function index(){
             $stuData = $this->stu->getdata();
             $records = $this->stu->getCount();
-            include './StudentIndexView.html';
+            include './View/Student/index.html';
         }
 
         public function add(){
-            include './StudentaddView.html';
+            include './View/Student/add.html';
         }
 
         public function insert(){
@@ -55,7 +51,7 @@
             // 通过创建的对象类，将id传参到学生model类的edit方法中
             $arr = $this->stu->edit($id);
             // 包含修改学生信息视图 StudentEditView.html
-            include "./StudentEditView.html";
+            include "./View/Student/edit.html";
         }
 
         public function update(){
@@ -77,15 +73,6 @@
                 $this->jump("<h2>修改学生数据失败</h2>");
             }
         }
-
-
-
-
     }
-    // 获取用户动作参数
-    // var_dump($_GET);
-    $ac = isset($_GET['ac']) ? $_GET['ac'] : 'index';
-    $stuobj = new StudentController();
-    // 与新闻控制器类相同，使用调用方法优化控制器代码
-    $stuobj->$ac();
+
 ?>

@@ -9,7 +9,6 @@
 /**
 * 新闻模型类
 */
-require_once "./Model/BaseModel.class.php";
 class NewsModel extends BaseModel
 {
     // 查询数据库并返回二维数组的新闻信息
