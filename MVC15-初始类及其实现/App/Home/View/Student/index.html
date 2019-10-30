@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>学生管理系统</title>
+    <script type="text/javascript">
+        function delete_function(stu_id){
+            if(window.confirm("确认是否删除？")){
+                location.href = "?p=Home&a=delete&c=Student&stu_id=" + stu_id;
+            }
+        }
+    </script>
+</head>
+<body>
+    <a href="?p=Home&a=index&c=Student">学生信息查看</a>
+    <a href="?p=Home&a=index&c=News">新闻信息查看</a>
+    <hr>
+    <div style="text-align: center">
+        <h2>-->学生管理系统<--</h2>
+        <a href="?p=Home&a=add&c=Student" font-size="14px" >添加学生</a>&nbsp;|&nbsp;该校共有学生
+        <?php echo "$records";?>
+        人
+    </div>
+
+    <table border=1px width=800 align="center" rules='all' cellpadding="5" ">
+        <tr align="center" >
+            <td>学号</td>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>年龄</td>
+            <td>班级</td>
+            <td>手机号</td>
+            <td>地址</td>
+            <td>操作</td>
+        </tr>
+    <?php foreach ($stuData as $v): ?>
+            <tr align="center">
+                <td><?php echo $v["stu_id"] ?></td>
+                <td><?php echo $v["name"] ?></td>
+                <td><?php echo $v["sex_sex"] ?></td>
+                <td><?php echo $v["age"] ?></td>
+                <td><?php echo $v["class_num"] ?></td>
+                <td><?php echo $v["phone"] ?></td>
+                <td><?php echo $v["addr"] ?></td>
+                <td>
+                    <a href="?p=Home&c=Student&a=edit&id=<?php echo $v['stu_id']?>">修改</a>|
+                    <a href="#" onClick="delete_function(<?php echo $v["stu_id"] ?>)">删除</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+  <!--            <tr>
+                <td colspan="8" height = '40px' align="center">
+                    <?php
+                        $start = $page - 4;
+                        $end = $page + 5;
+
+                        // 当起始页小于可显示栏时
+                        if($start <= 0){
+                            $start = 1;
+                            $end = 10;
+                        };
+                        // 当最后一页大于可显示栏时
+                        if($end >= $pages){
+                            $start = $pages - 6;
+                            $end = $pages;
+                        }
+                        for($i = $start ; $i < $end ; $i++){
+                            // 当前页面不加链接
+                            if($page == $i){
+                                echo "<span>$i</span>";
+                            }
+                            else{echo "<a href='?page=$i'>".$i.' '."</a>";}
+                        }
+                    ?>
+                </td>
+            </tr>-->
+    </table>
+
+
+</body>
+</html>
