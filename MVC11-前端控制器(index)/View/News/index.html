@@ -2,49 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>学生管理系统</title>
+    <title>新闻管理系统</title>
     <script type="text/javascript">
-        function delete_function(stu_id){
+        function delete_function(nid){
             if(window.confirm("确认是否删除？")){
-                location.href = "?ac=delete&stu_id=" + stu_id;
+                location.href = "?a=delete&c=News&nid=" + nid;
             }
         }
     </script>
 </head>
 <body>
-    <a href="./StudentController.class.php">学生信息查看</a>
-    <a href="./NewsController.class.php">新闻信息查看</a>
+    <a href="?a=index&c=Student">学生信息查看</a>
+    <a href="?a=index&c=News">新闻信息查看</a>
     <hr>
     <div style="text-align: center">
-        <h2>-->学生管理系统<--</h2>
-        <a href="?ac=add" font-size="14px" >添加学生</a>&nbsp;|&nbsp;该校共有学生
-        <?php echo "$records";?>
-        人
+        <h2>-->新闻管理系统<--</h2>
+        <a href="?a=index&c=add" font-size="14px" >添加新闻</a>&nbsp;|&nbsp;当前目录共有新闻
+        <?php echo "$records";?>条
     </div>
 
-    <table border=1px width=800 align="center" rules='all' cellpadding="5" ">
+    <table border=1px width=1050 align="center" rules='all' cellpadding="5" >
         <tr align="center" >
-            <td>学号</td>
-            <td>姓名</td>
-            <td>性别</td>
-            <td>年龄</td>
-            <td>班级</td>
-            <td>手机号</td>
-            <td>地址</td>
+            <td>新闻编号</td>
+            <td>标题</td>
+            <td>来源</td>
+            <td>点击数</td>
+            <td>发布时间</td>
             <td>操作</td>
         </tr>
-    <?php foreach ($stuData as $v): ?>
+    <?php foreach ($newData as $v): ?>
             <tr align="center">
-                <td><?php echo $v["stu_id"] ?></td>
-                <td><?php echo $v["name"] ?></td>
-                <td><?php echo $v["sex_sex"] ?></td>
-                <td><?php echo $v["age"] ?></td>
-                <td><?php echo $v["class_num"] ?></td>
-                <td><?php echo $v["phone"] ?></td>
-                <td><?php echo $v["addr"] ?></td>
+                <td><?php echo $v["nid"] ?></td>
+                <td align="left"><?php echo $v["title"] ?></td>
+                <td><?php echo $v["source"] ?></td>
+                <td><?php echo $v["hits"] ?></td>
+                <td><?php echo $v["addate"] ?></td>
                 <td>
-                    <a href="?ac=edit&id=<?php echo $v['stu_id']?>">修改</a>|
-                    <a href="#" onClick="delete_function(<?php echo $v["stu_id"] ?>)">删除</a>
+                    <a href="#">修改</a>|
+                    <a href="#" onClick="delete_function(<?php echo $v["nid"] ?>)">删除</a>
                 </td>
             </tr>
         <?php endforeach; ?>

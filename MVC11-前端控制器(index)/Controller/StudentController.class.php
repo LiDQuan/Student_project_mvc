@@ -1,9 +1,5 @@
 <?php
 
-    // 包含工厂模型类，通过工厂模型类的最终类的静态方法来new对象，提高安全性
-    // 调用最终类的静态方法是直接 类名::方法名($参数)
-    require_once "./Model/BaseController.class.php";
-
     final class StudentController extends BaseController{
 
         private $stu = null;
@@ -14,11 +10,11 @@
         public function index(){
             $stuData = $this->stu->getdata();
             $records = $this->stu->getCount();
-            include './StudentIndexView.html';
+            include './View/Student/index.html';
         }
 
         public function add(){
-            include './StudentaddView.html';
+            include './View/Student/add.html';
         }
 
         public function insert(){
@@ -33,9 +29,9 @@
                 'addr' => $_POST['addr']
             );
             if($this->stu->insert($arr)){
-                $this->jump("学生信息插入成功");
+                $this->jump("学生信息插入成功", "?c=Student");
             }else{
-                $this->jump("<h2>插入学生数据失败</h2>");
+                $this->jump("<h2>插入学生数据失败</h2>", "?c=Student");
             }
         }
 
@@ -43,19 +39,22 @@
             $id = $_GET['stu_id'];
             $result = $this->stu->delete($id);
             if($result){
-                $this->jump("<h2>学生数据删除成功</h2>,三秒后跳转");
+                $this->jump("<h2>学生数据删除成功</h2>,三秒后跳转", "?c=Student");
             }else{
-                $this->jump("<h2>删除数据失败，请检查输入是否正确</h2>");
+                $this->jump("<h2>删除数据失败，请检查输入是否正确</h2>", "?c=Student");
                 }
         }
 
         public function edit(){
+            // print_r($_GET);
             // 从地址栏中获取具体id信息
             $id = $_GET['id'];
+            // print_r($id);
+            // die();
             // 通过创建的对象类，将id传参到学生model类的edit方法中
             $arr = $this->stu->edit($id);
             // 包含修改学生信息视图 StudentEditView.html
-            include "./StudentEditView.html";
+            include "./View/Student/edit.html";
         }
 
         public function update(){
@@ -72,20 +71,11 @@
             );
             // 根据返回信息提示是否修改成功
             if($this->stu->update($arr, $id)){
-                $this->jump("学生信息修改成功");
+                $this->jump("学生信息修改成功", "?c=Student");
             }else{
-                $this->jump("<h2>修改学生数据失败</h2>");
+                $this->jump("<h2>修改学生数据失败</h2>", "?c=Student");
             }
         }
-
-
-
-
     }
-    // 获取用户动作参数
-    // var_dump($_GET);
-    $ac = isset($_GET['ac']) ? $_GET['ac'] : 'index';
-    $stuobj = new StudentController();
-    // 与新闻控制器类相同，使用调用方法优化控制器代码
-    $stuobj->$ac();
+
 ?>

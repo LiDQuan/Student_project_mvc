@@ -6,18 +6,18 @@
     <script type="text/javascript">
         function delete_function(stu_id){
             if(window.confirm("确认是否删除？")){
-                location.href = "?ac=delete&stu_id=" + stu_id;
+                location.href = "?a=delete&c=Student&stu_id=" + stu_id;
             }
         }
     </script>
 </head>
 <body>
-    <a href="./StudentController.class.php">学生信息查看</a>
-    <a href="./NewsController.class.php">新闻信息查看</a>
+    <a href="?a=index&c=Student">学生信息查看</a>
+    <a href="?a=index&c=News">新闻信息查看</a>
     <hr>
     <div style="text-align: center">
         <h2>-->学生管理系统<--</h2>
-        <a href="?ac=add" font-size="14px" >添加学生</a>&nbsp;|&nbsp;该校共有学生
+        <a href="?a=index&c=add" font-size="14px" >添加学生</a>&nbsp;|&nbsp;该校共有学生
         <?php echo "$records";?>
         人
     </div>
@@ -43,7 +43,7 @@
                 <td><?php echo $v["phone"] ?></td>
                 <td><?php echo $v["addr"] ?></td>
                 <td>
-                    <a href="?ac=edit&id=<?php echo $v['stu_id']?>">修改</a>|
+                    <a href="?c=Student&a=edit&id=<?php echo $v['stu_id']?>">修改</a>|
                     <a href="#" onClick="delete_function(<?php echo $v["stu_id"] ?>)">删除</a>
                 </td>
             </tr>
