@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新增新闻</title>
+</head>
+<body bgcolor="red">
+    <div align="center">
+        <h2>请输入新增新闻信息</h2>
+    </div>
+    <!--  表格提交  -->
+    <form method="post" action="?p=Admin&a=insert&c=News">
+        <table align="center"  border="1" cellpadding="5" bordercolor="#ccc" width="800" margin-top="100px">
+            <!-- 标题输入 -->
+            <tr>
+                <td text-align="center">
+                    标题(必录)
+                </td>
+                <td width="500px;">
+                    <input type="text" name="title" id="title">
+                </td>
+            </tr>
+            <!-- 文章录入优先级 -->
+            <tr>
+                <td text-align="center">
+                    文章优先级录入(1-100)(必录)
+                </td>
+                <td>
+                    <input type="text" name="orderby" id="orderby">
+                </td>
+            </tr>
+            <!-- 新闻内容 -->
+            <tr>
+                <td text-align="center">
+                    新闻内容
+                </td>
+                <td>
+                    <input type="text" name="content" id="content">
+                </td>
+            </tr>
+            <!-- 新闻点击数 -->
+            <tr>
+                <td text-align="center">
+                    新闻点击数(必录)
+                </td>
+                <td>
+                    <input type="text" name="hits" id="hits">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <input type="submit" value="提交">
+                    <input type="hidden" name="token" value="random">
+                    <input type="reset" value="重置">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+<html>
