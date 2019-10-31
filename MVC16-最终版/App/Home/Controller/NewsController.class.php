@@ -1,0 +1,71 @@
+<?php
+
+    final class NewsController extends BaseController{
+
+        private $new = null;    
+
+        public function __construct(){
+            $this->new = FactroyModel::getInstance("NewsModel");
+        }
+
+        public function delete(){
+            $id = $_GET['nid'];    
+            $result = $this->new->delete($id);
+            if($result){
+                $this->jump("<h2>新闻数据删除成功</h2>,三秒后跳转", "?p=Home&c=News");
+            }else{
+                $this->jump("<h2>删除数据失败，请检查输入是否正确</h2>", "?p=Home&c=News");
+            }
+        }
+        public function edit(){
+            // 从地址栏中获取id
+            $nid = $_GET['nid'];
+            // 根据nid提对应信息放入修改页面中
+            $arr = $this->new->fetchOne($nid);
+            include VIEW_PATH.'edit.html';
+        }
+
+        public function update(){
+            $nid = $_POST['nid'];
+            $arr = array(
+                "title" => $_POST['title'],
+                "orderby" => $_POST['orderby'],
+                "content" => $_POST['content'],
+                "hits" => $_POST['hits']
+            );
+            if($this->new->update($arr, $nid)){
+                $this->jump("新闻修改成功", "?p=Home&c=News");
+            }else{
+                $this->jump("<h2>新闻修改失败</h2>", "?p=Home&c=News");
+            }
+        }
+
+        public function index(){
+            $newData = $this->new->getdata();
+            $records = $this->new->getCount();
+            include VIEW_PATH.'index.html';
+        }
+
+        public function add(){
+            include VIEW_PATH.'add.html';
+        }
+
+        public function insert(){
+            date_default_timezone_set('UTC');
+            $arr_data = array(
+                'nid' => $this->new->get_Max('nid')['max(nid)'] + 1,
+                'cid' => 'writeInput'.($this->new->get_Max('nid')['max(nid)'] + 1),
+                'title' => $_POST['title'],
+                'orderby' => $_POST['orderby'],
+                'content' => $_POST['content'],
+                'hits' => $_POST['hits'],
+                'addate' => date('Y-m-d'),
+            );
+            if($this->new->insertdata($arr_data)){
+                $this->jump("新闻插入成功", "?p=Home&c=News");
+            }else{
+                $this->jump("<h2>新闻插入数据失败</h2>", "?p=Home&c=News");
+            }
+        }
+    }
+?>
